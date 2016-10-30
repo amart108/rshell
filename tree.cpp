@@ -6,58 +6,61 @@
 using namespace std;
 
 class Base{
-private:
-    
 public:
     Base(){};
-    virtual void execute() = 0;		//pure virtual
-    virtual void print_output()=0;		//pure virtual
+    virtual void execute() = 0;			//pure virtual execute parameter
+    virtual bool cmd_check()
 };
 
 class Connector: public Base{
 protected:
     char* argv[];
-    Base* left;
-    Base* right;
+    bool left_bool, right_bool;
 public:
     Connector(): Base(){};
     Connector(): Base(){
     };
-    
-    void add_command(char* argv[]){
-	this->argv = argv;
-    };
-
-    void remove_command(Base* command){
-	for(unsigned i = 0; i < command.size(); i++){
-	    if(command == this->command.at(i))
-		this->command.erase(this->command.begin() + i);
-		return;
+    bool cmd_check(left, right){
+	if(left_bool == true){
+	    if(right_bool == true){
+		execute(argv);
 	    }
+	    else{
+		    cout << "Error message"<<endl;
+	    }
+	else{
+	    cout<<"Error message"<<endl;
 	}
     };
-    void print_output(){
-	for(unsigned i = 0; i < command.size(); i++){
-	    command.at(i)->print_output();
-	}
-    };
+// 	return true ,if cmd is true
+    
+    void execute(char* argv){
+	    execute(argv);
+    }
+// return true if cmd is excuted 
+    
 };
 
 class Semi: public Base{
 protected:
     Base* left;
     Base* right;
+    char* argv[];
 public:
     Semi(): Base(){};
-    Semi(): Base(){
+    Semi(Base* left, Base* right): Base(){
+	this->left = left;
+	this->right = right;
     };
-    void print_output(){
 	
-    };
-    void execute(){		//both left and right will be executed
-	left->execute();	//need to make childs to '0'
-	right->execute();
-    };
+    bool cmd_exe_check(){		//check command is executed
+    if(true){
+	return true;
+
+    void execute(){			//both left and right will be executed
+	if(cmd_check() == true){	//
+	    argv[]->execute();		
+	};
 };
 
 class And: public Base{
@@ -73,8 +76,9 @@ public:
     
     };
     void execute(){
-	if(left == true){	//true means executed(with valid command)
-	right->execute();	//use bool function return true or false if command is executed or not
+	if(cmd_exe_check(left) == true){
+	    right->execute();	//true means executed(with valid command)
+	    			//use bool function return true or false if command is executed or not
 				//we need two bools(one bool per each command which can be overwritten
 	}
     };
@@ -98,21 +102,6 @@ public:
     };
 };
 
-/*
-class Pound: public Base{
-protected:
-    char pound = '#';
-    vector <Base*> command;
-public:
-    Pound(): Base(){};
-
-    void print_output(){
-    };
-
-    void execute(){
-	for(un
-*/
-
 class Command: Base{
 private:
     string cmd;
@@ -120,15 +109,4 @@ public:
     Command(): Base(){};
     Command(string cmd): Base(){
 	this->cmd = cmd;
-    };/*
-    void print_cmdHead(string cmd){
-	cout<<"$ ";
-	getline(cin,cmd);		//do we need getline(cin, cmd)? or just cin?
     };
-    void print_output(){
-	if(cmd == true){		//need to add verifying cmd(with header function)
-	execute();
-	}
-	else(cmd == false){
-	cout<< "Invalid command, try again
-*/
