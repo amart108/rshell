@@ -13,11 +13,11 @@ CMD::CMD()
 CMD::CMD(string prompt)
 {
 	commandPrompt = prompt;
-	//cout << prompt;
+
 }
 
 void CMD::CmdAndCntrs(const string &input_file){
-	//cout << commandPrompt;
+
 	ifstream fileIn;
 	string c1;
 //	string c2;
@@ -27,12 +27,15 @@ void CMD::CmdAndCntrs(const string &input_file){
 	cout << "Could not open file" << input_file << "." << endl;
 	//return 1;
 	}
-	cout << commandPrompt << endl;	
+	
 	fileIn >> c1;
-//	fileIn >> c2;
-//	fileIn >> c3;
-	//cout << "c1: " << c1 << " and c2: " << endl;
-	stringSep.push_back(c1);
+	if(c1 == "$"){
+	cout << commandPrompt << endl;
+	}
+	else
+	{
+		stringSep.push_back(c1);
+	}
 	//stringSep.push_back(POS(c1,c2));
 	//stringSep.push_back(c2);
 	//cout << "Before next line" << endl;
@@ -40,14 +43,16 @@ void CMD::CmdAndCntrs(const string &input_file){
 	{
 	//	cout << "Next Line " << endl;
 		fileIn >> c1;
-	//	fileIn >> c2;	
-//		fileIn >> c3;
-		if(c1 != "end")
-		{
+		if(c1 == "$"){
+		cout << commandPrompt << endl;}
+		else{
+			if(c1 != "end")
+			{
 //			cout << commandPrompt << endl;
-			stringSep.push_back(c1);
+				stringSep.push_back(c1);
 			//stringSep.push_back(POS(c1,c2));
 //		stringSep.push_back(c2);
+			}
 		}
 	}
 

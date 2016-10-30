@@ -20,7 +20,7 @@ int main(int argc, char*argv[])
 	//cout << "checking display: " << endl;
 	A.cleanUp();
 	A.comment();
-	A.display();	
+	//A.display();	
 	//cout << "Done." << endl;
 	return 0;
 }
