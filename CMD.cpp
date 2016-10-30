@@ -12,17 +12,15 @@ CMD::CMD()
 
 CMD::CMD(string prompt)
 {
-	commandPrompt = prompt;
+	commandPrompt = prompt; // get the command prompt: $
 
 }
 
 void CMD::CmdAndCntrs(const string &input_file){
-
-	ifstream fileIn;
+	ifstream fileIn; // get the string from cmdLine.txt file 
 	string c1;
-//	string c2;
-//	string c3;
 	fileIn.open(input_file.c_str());
+
 	if(!fileIn.is_open()){
 	cout << "Could not open file" << input_file << "." << endl;
 	//return 1;
@@ -30,28 +28,23 @@ void CMD::CmdAndCntrs(const string &input_file){
 	
 	fileIn >> c1;
 	if(c1 == "$"){
-	cout << commandPrompt << endl;
+	cout << commandPrompt << endl; //Checks if the string pull from the file is the command prompt so it just outputs the command prompt 
 	}
 	else
-	{
+	{//this pushes c1 into the string vector stringsep that I created.
 		stringSep.push_back(c1);
 	}
-	//stringSep.push_back(POS(c1,c2));
-	//stringSep.push_back(c2);
-	//cout << "Before next line" << endl;
+
 	while(!fileIn.eof())
-	{
-	//	cout << "Next Line " << endl;
-		fileIn >> c1;
+	{// this also pushes the rest of the cmdLine.txt file in the vector until 
+		fileIn >> c1; // the end of the file has been reached
 		if(c1 == "$"){
 		cout << commandPrompt << endl;}
 		else{
 			if(c1 != "end")
 			{
-//			cout << commandPrompt << endl;
+
 				stringSep.push_back(c1);
-			//stringSep.push_back(POS(c1,c2));
-//		stringSep.push_back(c2);
 			}
 		}
 	}
@@ -62,15 +55,12 @@ void CMD::CmdAndCntrs(const string &input_file){
 
 void CMD::display(){
 	for(unsigned i = 0; i < stringSep.size(); i++){
-	//	char t = '$';
-		//cout << commandPrompt;
-		//cout << i << ": ";
 		cout <<  stringSep.at(i) << endl;
 	}
 	cout << endl;
 }
 
-void CMD::cleanUp(){
+void CMD::cleanUp(){// this removes the semi-colon from an element in the vector and inserts it an an element after the element it was removed from
 vector<string>temp;
 
 
@@ -94,7 +84,7 @@ for(unsigned i = 0; i < stringSep.size(); i++){
 stringSep = temp;
 }
 
-void CMD:: comment(){
+void CMD::comment(){// this removes anything from the command line after the # has appeared in the command line
 for(unsigned i = 0; i < stringSep.size(); i++)
 {
 	//char t = '#';
@@ -104,4 +94,8 @@ for(unsigned i = 0; i < stringSep.size(); i++)
 		stringSep.erase(stringSep.begin() + i, stringSep.end());
 	}			
 }
+}
+
+string CMD::At(int i){ // this allow the users to get an elements from the vector
+return stringSep.at(i);
 }
