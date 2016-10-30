@@ -5,13 +5,13 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "PartOfString.h"
+
 
 using namespace std;
 
 class CMD
 {
-        private:
+        protected:
  //      vector<POS> stringSep;
 	vector<string> stringSep;
 	string commandPrompt;
@@ -23,6 +23,7 @@ class CMD
 	void display();
 	void cleanUp();	
 	void comment();
+	string At(int i);
 //void clean(vector<string> &c);
 };
 #endif

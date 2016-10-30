@@ -3,6 +3,11 @@
 #include <string>
 #include <vector>
 #include "CMD.h"
+#include <cstring>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -20,7 +25,7 @@ int main(int argc, char*argv[])
 	//cout << "checking display: " << endl;
 	A.cleanUp();
 	A.comment();
-	A.display();	
+	//A.display();	
 	//cout << "Done." << endl;
 	return 0;
 }
