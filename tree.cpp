@@ -8,11 +8,11 @@ using namespace std;
 class Base{
 public:
     Base(){};
-    virtual void execute(string command) = 0;			//pure virtual execute parameter
-    virtual bool cmd_check(string command) = 0;
-};
+    virtual void execute(string command) = 0;		//pure virtual execute function
+    virtual bool valid_check(string command) = 0;	//check command is valid or invalid
+};							//we regard bad commands as Not executed command
 
-class Connector: public Base{
+class Connector: public Base{ 
 protected:
     string command;
 public:
@@ -20,95 +20,142 @@ public:
     Connector(string command): Base(){
 	this->command = command;
     };
-    Connector(Base* left, Base* right): Base(){ //c'tor overloading with 				
-	this->left = left;			//left(cmd+executable) + right(cmd + executable)
-	this->right = right;
-    };
-    bool cmd_check(){			
-			//... split string command into two part(cmd + executable) and check those are valid
-	if(left is one of commands)
-	{
-	    if(right is one of executables){
-		return true;
-	    }
-	    else{
-		cout << "Input valid command"<<endl;
-		return false;
-	    }
+    bool valid_check(string command){			//check the command is good or bad.
+	if(command == valid){				//... command validity check
+	    return true;
 	}
 	else{
-	    cout<<"Input valid command"<<endl;
 	    return false;
 	}
     };
 
-    void execute(){			//execute definition
-	if(this->command->cmd_check() == true){
-	   //execute
+    void execute(){					//execute definition
+	if(valid_check(string command) == true){	//If it's a valid command
+	   right -> execute();				//will executed
 	}
+	else{						//if it's invalid, print "Invalid command"
+	    cout<< "Invalid command"<<endl;
+        }
     }
 };    
 
 class Semi: public Base{
 protected:
-    Base* left;				//command on left(cmd+executable)
-    Base* right;			//command on right(cmd+executable)
-    string command_left, command_right;
+    Base* left;						//command on left
+    Base* right;					//command on right
+    string command;					//right command for valid check
 public:
-    Semi(): Base(){};			//default c'tor
-    Semi(Base* left, Base* right, string command1, string command2): Base(){
-	this->left = left;		//c'tor with two parameter which is separated in cmd+executable
-	this->right = right;
-	this->command_left = command1;
-	this->command_right = command2;
+    Semi(): Base(){};					//default c'tor
+    Semi(Base* left, Base* right, string command): Base(){
+	this->left = left;				//c'tor with three parameters which are left
+	this->right = right;				//right command and a command for check validty
+	this->command = command;
     };
-    bool cmd_check(){
-	this->command_left->cmd_check();
-	this->command_right->cmd_check();
-    }
-    bool cmd_exe_check(){
-	this->left->cmd
-    void execute(string command){			//both left and right will be executed no matter what
-	right->execute();		//if invalid cmd executed, error message will appear.
-	};
+    bool valid_check(string command){			//check validity
+        if(command == valid){
+            return true;
+        }
+        else{
+            return false;
+        }
+    };
+
+    void execute(){					//both left and right will be executed
+	if(valid_check(string command) == true){	//no matter what
+	    right->execute();				//if invalid cmd executed, 
+    	}						//error message will appear.
+	else{
+	    cout << "Invalid command"<<endl;
+	}
+    };
 };
 
 class And: public Base{
 protected:
     Base* left;
     Base* right;
-    
+    string command;
 public:
-    And(): Base(){};			//default c'tor
-    And(Base* left, Base* right): Base(){
-	this->left = left;		//c'tor with two parameter which is separated in cmd+executable
-	this->right = right;
+    And(): Base(){};					//default c'tor
+    And(Base* left, Base* right, string command): Base(){
+	this->left = left;				//c'tor with three parameter which are left,
+	this->right = right;				//right command and command for check validity
+	this->command = command;
     };
-    
-    };
-    void execute(){
-	if(cmd_check(left) == true){
-	    right->execute();		//true means executed(with valid command)
-	else if(cmd_check(left) != true)//use bool function return true or false if command is executed or not
-	    return;			//we need two bools(one bool per each command which can be overwritten
+    bool valid_check(string command){			//check validity
+	if(command == valid){
+	    return true;
+	}
+	else{
+	    return false;
 	}
     };
+
+    bool cmd_exe_check(Base* left){			//cmd exe check "&&"
+	if(left->execute()){				//if left(cmd+executable)executed, return true
+	    return true;				//other case, return false
+	}
+	else
+	    return false;
+	}
+    };
+
+    void execute(){
+	if(cmd_exe_check(left) == true){
+	    if(valid_check(string command) == true){
+	        right->execute();			//if left executed, and valid command
+	    }						//command will be executed
+	    else{ 			
+	        cout << "Invalid command"<<endl;	//left executed but invalid command 
+	    }						//print "Invalid command"
+	}						//if left is not executed, execute/print Nothing
+	else{
+	    return;	
+	}  
+    };
 };
+
 class Or: public Base{
 protected:
     Base* left;
     Base* right;
+    string command;
 public:
-    Or(): Base(){};			//default c'tor
-    Or(Base* left, Base* right): Base(){
-	this->left = left; 		//c'tor with two parameter which is separated in cmd+executable
-	this->right = right;
+    Or(): Base(){};					//default c'tor
+    Or(Base* left, Base* right, string command): Base(){
+	this->left = left; 				//c'tor with three parameters which are left,
+	this->right = right;				//right command and command for check validity
+	this->command = command;
     };
-    void execute(){
-	if(cmd_check(left) != true){	//false means not executed(with invalid command)
-	    right->execute();
+    
+    bool valid_check(string command){			//check validity
+	if(command == valid){
+	    return true;
 	}
-	else if(cmd_check(left) == true){
+	else{
+	    return false;
+	}
+    };
+    
+    bool cmd_exe_check(Base* left){			//cmd exe check "||" 
+	if(left->execute()){				//if left(cmd+executable) executed, return false
+	    return false;				//other case, return true;
+	else
+	    return true;
+    };
+
+    void execute(){
+	if(cmd_exe_check(left) != true){		//if left is not executed, and valid command
+	    if(valid_check(string command){		//command will be executed
+		right->execute();
+	    }
+	    else{
+		cout<< "Invalid command"<<endl;		//if left is not executed, and invalid command
+	    }						//print "Invalid command"
+	}						//if left is executed, execute/print Nothing
+	else{
 	    return;
+	}
     };
 };
+
