@@ -24,6 +24,7 @@ class CMD
 	void cleanUp();	
 	void comment();
 	string At(int i);
+	void cpy(vector<string> &s);
 //void clean(vector<string> &c);
 };
 #endif

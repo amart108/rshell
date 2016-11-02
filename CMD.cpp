@@ -99,3 +99,8 @@ for(unsigned i = 0; i < stringSep.size(); i++)
 string CMD::At(int i){ // this allow the users to get an elements from the vector
 return stringSep.at(i);
 }
+void CMD::cpy(vector<string> &s){
+	for(unsigned i = 0; i < stringSep.size(); i++){
+		s.push_back(stringSep.at(i));
+	}
+}

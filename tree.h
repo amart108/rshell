@@ -1,82 +1,95 @@
 #ifndef TREE_H
 #define TREE_H
 
+#include<sys/types.h>
+#include<sys/wait.h>
+#include <iostream>
+#include <string>
+#include <unistd.h>
+//#include "CMD.h"
+
 using namespace std;
 
 class Base{
-private:
-
 public:
-    Base();
-    virtual void execute()= 0;
-    virtual void print_output()= 0;
+    Base(){};
+    virtual int execute() = 0;			//pure virtual execute parameter
+  //  virtual bool cmd_check(string command) = 0;
 };
 
-class Connector: public Base{
+class Command : public Base{
 protected:
-    char* argv[];
-    Base* left;
-    Base* right;
+	string cm;
+
 public:
-    Connector(): Base();	//default constructor
-    void add_command(char*);
-    void remove_command(Base* );
-    void print_output();
-    void execute();
+	Command(string cm1): cm(cm1) {};
+	int execute(){
+	// do fork and execvp and return when execvp does 
+		int pid = fork();
+		if(pid == 0)
+		{
+			execvp();
+		}
+		else if(pid < 0 )
+		{
+			cout << "Error forking" << endl;
+
+		}
+		else
+		{
+			int* status;
+			wait(status);
+		}
+		return -1;
+	}
 };
 
 class Semi: public Base{
 protected:
-    Base* left;
-    Base* right;
+    Base* left;				//command on left(cmd+executable)
+    Base* right;			//command on right(cmd+executable)
+//    string command_left, command_right;
 public:
-    Semi(): Base();		//default c'tor
-    Semi(): Base();		//constructor with numbers of parameters		
-    void print_output();
-    void execute();
+	Semi(Base* l, Base* r):left(l), right(r) {};
+	int  execute(){	
+	return this->right->execute();
+	}
 };
 
 class And: public Base{
 protected:
     Base* left;
     Base* right;
+    
 public:
-    And(): Base();		//default c'tor
-    And(): Base();		//c'tor with numbers of parameters
-    void print_output();
-    void execute();
+    And(Base* l, Base* r): left(l), right(r) {};
+	int  execute(){
+		if(/* left command doesn't fail */) 
+		{ 
+			return this->right->execute();
+		}
+		else{
+			//return the failure
+		}
+	}
+	
 };
-
 class Or: public Base{
 protected:
     Base* left;
     Base* right;
 public:
-    Or(): Base();		//default c'tor
-    Or(): Base();		//c'tor with numbers of parameters
-    void print_output();
-    void execute();
+    Or(Base* l, Base* r): left(l), right(r) {};
+    int execute(){
+	if(/*left does not execute */)
+	{	
+		return this->right->execute();
+	}
+	else
+	{
+		//return the failure;
+	}
+	}
 };
 
-class Pound: public Base{
-protected:
-    char pound;
-    vector<Base*> command;
-public:
-    Pound(): Base();
-    void print_output();
-    void execute();
-};
-
-class Command: Base{
-private:
-    string cmd;
-public:
-    Command(): Base();		//default c'tor
-    Command(string cmd):Base(); //c'tor with parameter 'cmd'
-    void print_output();
-    void print_cmdHead(string cmd);
-    void print_output();
-    void execute();
-};
 #endif
