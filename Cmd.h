@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdlib.h>
 #include "tree.h"
 using namespace std;
 
@@ -74,21 +75,21 @@ if(cnctrs.size() == 0)
 {
 //	cout << "single commands" << endl;
 	start = new Command(cmdline);
-	cout << "done with singles" << endl;
+//	cout << "done with singles" << endl;
 
 }
 else
 {
 	if(cnctrs.size() > 1)
 	{
-		cout << "4" << endl;
+//		cout << "4" << endl;
 		for(unsigned j = 0; j + 1 < cnctrs.size(); j++)
 		{
-			cout << "J: " << j << ", " << cnctrs.at(j) << ", " << cmdline.at(cnctrs.at(j)) << endl;
-			cout << "next: " << j + 1 << ", " << cnctrs.at(j+1) - 1 << ", "  <<  cmdline.at((cnctrs.at(j + 1))) << endl;
+			//cout << "J: " << j << ", " << cnctrs.at(j) << ", " << cmdline.at(cnctrs.at(j)) << endl;
+			//cout << "next: " << j + 1 << ", " << cnctrs.at(j+1) - 1 << ", "  <<  cmdline.at((cnctrs.at(j + 1))) << endl;
 			if(cmdline.at(cnctrs.at(j)) != cmdline.at((cnctrs.at(j + 1))))
 			{
-				cout << "5" << endl;
+				//cout << "5" << endl;
 				if(cmdline.at(cnctrs.at(j)) == ';')
 				{
 					left = cmdline.substr(0, cnctrs.at(j));
@@ -96,6 +97,7 @@ else
 				else
 				{
 					left = cmdline.substr(0, cnctrs.at(j) - 1);
+					Exit(left);
 				}
 				right = cmdline.substr(cnctrs.at(j) + 1, cnctrs.at(j + 1) - cnctrs.at(j) - 1);
 				right.erase(0,1);
@@ -115,12 +117,13 @@ else
 				{
 					connector = "or"; 
 				}
+				Exit(right);
 //				cout  << "makeing connectors" << endl;
 //			cout << "problems" << endl;
 				t2 = new Command(right);
 //			cout << connector << endl;
 				t = new Command(left);
-				cout << "6" << endl;
+			//	cout << "6" << endl;
 				if(cnt  == 0)
 				{
 					cout << "7" << endl;
@@ -140,8 +143,8 @@ else
 				}
 				else
 				{
-					cout << "8" << endl;
-					cout << "OThers; " << endl;	
+			//		cout << "8" << endl;
+			//		cout << "OThers; " << endl;	
 					if(connector == "semi")
 					{
 						start = new Semi(start,t2);
@@ -161,19 +164,21 @@ else
 			}
 			else
 			{
-				cout << "9" << endl;
+				//cout << "9" << endl;
 
 				if(cmdline.at(cnctrs.at(j + 1)) == '&')
 				{
 			//		Base* t3 = new Command("ls -a");
 			//		Base* t4 = new Command("echo hello");
 			//		Base* t5 = new Semi(t3,t4);
-					cout << "10" << endl;
+			//		cout << "10" << endl;
 					right = cmdline.substr(cnctrs.at(j + 1) + 1);
-					cout << "Left: " << left << endl;
+					//cout << "Left: " << left << endl;
 					//, cnctrs.at(j + 1) - cnctrs.at(j) - 1);	
 					right.erase(0,1);
-					cout << "Right: " << right << endl;
+					Exit(left);
+					Exit(right);
+					//cout << "Right: " << right << endl;
 					if(right.at(right.length() - 1) == ' ')
 					{
 						right.resize(right.length() - 1);
@@ -184,19 +189,20 @@ else
 				}	
 				else
 				{
-					cout << "11" << endl;
+//					cout << "11" << endl;
 					right = cmdline.substr(cnctrs.at(j) + 1);
                                         right.erase(0,1);
                                         if(right.at(right.length() - 1) == ' ')
                                         {
                                                 right.resize(right.length() - 1);
                                         }
+					Exit(right);
 					connector == "Or";
 					t2 = new Command(right);
 					start = new Or(start, t2);
 				}
-				cout << "j: " << j << endl;
-				cout << "j + 1: " << j + 1 << endl;
+//				cout << "j: " << j << endl;
+//				cout << "j + 1: " << j + 1 << endl;
 			
 
 			}
@@ -207,12 +213,13 @@ else
 	cnt += 1;
 	if(cmdline.at(cnctrs.at(cnctrs.size() - 1)) == ';')
 	{
-		cout << "one semi" << endl;
+	//	cout << "one semi" << endl;
 		connector = "semi";
 		left = cmdline.substr(0, (cnctrs.at(cnctrs.size() - 1)));
 		right = cmdline.substr(cnctrs.at(cnctrs.size() - 1));
 		right.erase(0,2);
-		
+		Exit(left);
+		Exit(right);	
 			//cout << connector << endl;
 			//cout << left << endl;
 		//cout << right << endl;
@@ -227,17 +234,18 @@ else
 				//cout << "size: " << cnctrs.size() << endl;
 		if(cnctrs.size() < 2) 
 		{
-		cout << "special case " << endl;
+	//	cout << "special case " << endl;
 			left = cmdline.substr(0, (cnctrs.at(cnctrs.size() - 1)));
 		}
 		else
 		{
-		cout << "normal" << endl;
+	//	cout << "normal" << endl;
 			left = cmdline.substr(0, (cnctrs.at(cnctrs.size() - 1)) - 1); 
 		}
 		right = cmdline.substr(cnctrs.at(cnctrs.size() - 1) + 1); // if right = & then user must enter another command 
 		right.erase(0,1);
-		
+		Exit(left);
+		Exit(right);	
 		if(right == "&")
 		{
 			right = ""; 
@@ -264,7 +272,8 @@ else
 		}
 		right = cmdline.substr(cnctrs.at(cnctrs.size() - 1) + 1);// if right = | then user must enter another command or something
 		right.erase(0,1);
-			
+		Exit(left);
+		Exit(right);		
 		if(right == "|")
 		{
 			right = "";
@@ -280,10 +289,23 @@ else
 	}			
 		//cout << "Cnt: " << cnt << endl;
 }
-cout << "done with splits" << endl;
+//cout << "done with splits" << endl;
 };
 
-void Exit()
+void Exit(string s)
+{
+	size_t found = s.find("exit");
+	size_t found1 = s.find("Exit");
+	if(found != string::npos)
+	{
+		exit(0);
+	}
+	if(found1 != string::npos)
+	{
+		exit(0);
+	}
+};
+	
 
 
 public:
