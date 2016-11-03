@@ -36,7 +36,7 @@ public:
 		string t = "";
 		string t2 = "";
 		cout << "Cm:" << cm << endl;
-		for(unsigned i = 0; i < cm.length(); i++)
+		for(unsigned i = 0; i + 1 < cm.length(); i++)
 		{
 			if(cm.at(i) == ' ')
 			{
@@ -71,7 +71,7 @@ public:
 		pid_t  pid = fork();
 		if(pid < 0)
 		{
-			cout << "Fork is not operating.";
+			perror( "Fork is not operating.");
 			exit(1);
 		}
 		else if (pid > 0)
@@ -80,7 +80,8 @@ public:
 			wait(sit);
 			if(*sit < 0)
 			{
-				cout << "Wait in not functioning" << endl;
+				perror("Wait in not functioning");
+				exit(1);
 			}
 			else if(*sit == 0)
 			{
@@ -95,7 +96,7 @@ public:
 		{	
 			if(execvp(arg[0], arg) < 0)
 			{
-				cout << "The command failed to execute." << endl;
+				perror( "The command failed to execute.");
 				exit(1);
 			}	
 			exit(0);
@@ -133,10 +134,12 @@ public:
 	And(Base* l, Base* r): left(l), right(r) {};
 	int execute() // This checks if the left command executed properly is it did then it executes the right command if not it return -1;
 	{
-//		cout << "And" << endl;
+		cout << "And" << endl;
 		//this->left->execute();
 		//int result = 0;
+		
 		cout << "Left" << endl;
+		this->left->execute();
 		if(this->left->execute() > 0) 
 		{
 			cout << "Right" << endl;	
