@@ -1,0 +1,29 @@
+CC=g++
+CC_FLAGS=-Wall -Werror -ansi -pedantic
+EXEC= rshell
+SOURCES=$(/wildcard src/ *.cpp)
+OBJECTS=$(SOURCES:.cpp=.o)
+
+$(EXEC): $(OBJECTS)
+	mkdir bin
+	$(CC) $(OBJECTS) -o $(EXEC)
+	mv ./rshell vin
+	mv src/main.o bin
+
+rshell: $(OBJECTS)
+	mkdir bin
+        $(CC) $(OBJECTS) -o $(EXEC)
+        mv ./rshell vin
+        mv src/main.o bin
+
+all: $(OBJECTS)
+        mkdir bin
+        $(CC) $(OBJECTS) -o $(EXEC)
+        mv ./rshell vin
+        mv src/main.o bin
+
+%.o: %.cpp
+	$(CC) -c $(CC_FLAGS) $< -o $@
+
+clean:
+	rm -f $(EXEC) $(OBJECTS)

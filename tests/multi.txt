@@ -1,0 +1,21 @@
+ls -a; echo world; mkdir echo
+ls -a; mkdir test && git status
+echo hello; ls -a; git stauts || echo bye
+git status && echo why || git status; ls -a
+ls -a; echo hello && mkdir test || echo world; git status
+ls -a ; echo hello&& mkdir test || echo bye; git status
+echo world && mkdir example; git status || ls -a;
+mkdir test && git status || ls -a; echo world && echo bye
+ls; mkdir bye || git status; ls -a && echo world
+mkdir hello || git pull; echo world && git status; ls -a
+git status && echo goodbye world || echo goodbye assignment; ls -a
+ls -a; mkdir why && echo ls -a; git status || ls -a
+echo terrible ; ls -a; mkdir echo; cd echo || ls -a
+echo assignment && ls -a; mkdir outcome || ls -a; git status
+ls -a; mkdir plus && echo why; git status
+ls -a; echo mkdir test && git status || ls
+ls -a && echo hello&&
+mkdir test || git status &&
+git status && echo bye;
+git status; mkdir test;
+exit

@@ -1,0 +1,22 @@
+ls -a #
+ls -a#
+ls #-a
+echo hello#
+echo #hello
+echo world#
+echo #world
+mkdir #test
+mkdir test#
+git #status
+git status#
+git status # echo hello; git status; ls -a
+git #status # echo hello; git status; ls -a
+echo hello; git status && ls -a; echo bye
+echo hello; ls -a;echo world; git status
+ls -a; echo #hello && mkdir test || echo world; git status
+ls #-a; echo #hello && mkdir test || echo world; git status
+#ls -a; || echo bye && mkdir example && git status
+echo why || git status && # mkdir this; echo bye
+ls -a && git status; echo hello # mkdir test
+git status; echo why || mkdir #test; ls -a
+

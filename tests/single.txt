@@ -1,0 +1,21 @@
+ls -a
+echo hello
+mkdir test
+git status
+echo by
+mkdir why
+echo this assignment
+mkdir pull
+rm -r pull
+git push
+echo goodbye
+mkdir why_this_assignment
+echo nope
+echo ending
+rm
+cd
+ls
+echo 
+mkdir
+git
+Exit
