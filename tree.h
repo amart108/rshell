@@ -71,7 +71,9 @@ public:
 		pid_t  pid = fork();
 		if(pid < 0)
 		{
+<<<<<<< HEAD
 			perror( "Fork is not operating.");
+>>>>>>> 7a93b03974492a0eff43025fe3eaeebe5ff9511f
 			exit(1);
 		}
 		else if (pid > 0)
@@ -81,7 +83,9 @@ public:
 			if(*sit < 0)
 			{
 				perror("Wait in not functioning");
+<<<<<<< HEAD
 				exit(1);
+>>>>>>> 7a93b03974492a0eff43025fe3eaeebe5ff9511f
 			}
 			else if(*sit == 0)
 			{
@@ -96,7 +100,11 @@ public:
 		{	
 			if(execvp(arg[0], arg) < 0)
 			{
+<<<<<<< HEAD
 				perror( "The command failed to execute.");
+
+
+>>>>>>> 7a93b03974492a0eff43025fe3eaeebe5ff9511f
 				exit(1);
 			}	
 			exit(0);
