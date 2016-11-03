@@ -126,7 +126,7 @@ else
 			//	cout << "6" << endl;
 				if(cnt  == 0)
 				{
-					cout << "7" << endl;
+//					cout << "7" << endl;
 					if(connector == "semi")
 					{
 						start =  new Semi(t,t2);
