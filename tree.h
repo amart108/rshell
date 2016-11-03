@@ -71,7 +71,7 @@ public:
 		pid_t  pid = fork();
 		if(pid < 0)
 		{
-			cout << "Fork is not operating.";
+			perror("Fork is not operating.");
 			exit(1);
 		}
 		else if (pid > 0)
@@ -80,7 +80,7 @@ public:
 			wait(sit);
 			if(*sit < 0)
 			{
-				cout << "Wait in not functioning" << endl;
+				perror("Wait in not functioning");
 			}
 			else if(*sit == 0)
 			{
@@ -95,7 +95,7 @@ public:
 		{	
 			if(execvp(arg[0], arg) < 0)
 			{
-				cout << "The command failed to execute." << endl;
+				perror("The command failed to execute.");
 				exit(1);
 			}	
 			exit(0);
