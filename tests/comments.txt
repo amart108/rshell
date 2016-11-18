@@ -1,22 +1,21 @@
-ls -a #
-ls -a#
-ls #-a
-echo hello#
-echo #hello
-echo world#
-echo #world
-mkdir #test
-mkdir test#
-git #status
-git status#
-git status # echo hello; git status; ls -a
-git #status # echo hello; git status; ls -a
-echo hello; git status && ls -a; echo bye
-echo hello; ls -a;echo world; git status
-ls -a; echo #hello && mkdir test || echo world; git status
-ls #-a; echo #hello && mkdir test || echo world; git status
-#ls -a; || echo bye && mkdir example && git status
-echo why || git status && # mkdir this; echo bye
-ls -a && git status; echo hello # mkdir test
-git status; echo why || mkdir #test; ls -a
+(echo A && #echo B) || (echo C && echo D)
+echo A && (echo B || (echo C && #echo D))
+(ls -a; echo hello) && (mkdir #test || echo world); git status
+(ls -a || (#echo hello && echo world)) || (git status; mkdir assn3)
+ls -a; echo hello && mkdir test || (#echo world; git status)
+ls || (echo world && #git status)
+#git status; echo why || (cd && echo correct)
+(echo world && #echo bye) || (git status; #mkdir cs100)
+(git status && (echo hello || #echo world)) || (mkdir tests)
+(mkdir assignments; git status) && (git status || (#echo world && ls))
+(mkdir bye && git commit) || (echo world; git status)
+git status; #echo bye || (ls -a && git status)
+(ls && ls -a) || (echo hello; echo world)
+(ls -a && cd) || (git #status || ecoh world)
+(ls -a && echo world) || git sta#tus || (echo world; ls -a)
+(mkdir test && echo w#orld) || (ls -a; git status)
+git status && ls -a || (echo cs100 && echo grades)
+ls -a || (echo world && #echo bye) && echo end
+ls -a || (echo world && mkdir hello || echo hello#; git status)
+(ls -a; echo hello) || (mkdir test || (echo w#orld; git status) && echo end)
 

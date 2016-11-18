@@ -1,0 +1,21 @@
+(echo A && echo B) || (echo C && echo D)
+echo A && (echo B || (echo C && echo D))
+(ls -a; echo hello) && (mkdir test || echo world); git status
+(ls -a || (echo hello && echo world)) || (git status; mkdir assn3)
+ls -a; echo hello && mkdir test || (echo world; git status)
+ls || (echo world && git status)
+git status; echo why || (cd && echo correct)
+(echo world && echo bye) || (git status; mkdir cs100)
+(git status && (echo hello || echo world)) || (mkdir tests)
+(mkdir assignments; git status) && (git status || (echo world && ls))
+(mkdir bye && git commit) || (echo world; git status)
+git status; echo bye || (ls -a && git status)
+(ls && ls -a) || (echo hello; echo world)
+(ls -a && cd) || (git status || ecoh world)
+(ls -a && echo world) || git status || (echo world; ls -a) 
+(mkdir test && echo world) || (ls -a; git status)
+git status && ls -a || (echo cs100 && echo grades)
+ls -a || (echo world && echo bye) && echo end
+ls -a || (echo world && mkdir hello || echo hello; git status)
+(ls -a; echo hello) || (mkdir test || (echo world; git status) && echo end)
+

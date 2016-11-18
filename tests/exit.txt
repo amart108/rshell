@@ -5,16 +5,16 @@ git status Exit
 echo world; git status exit
 ls -a && mkdir test exit
 mkdir test && exit; 
-git pull; ls && echo hello; exit
-echo push && mkdir push || ls -a && exit
-git status; mkdir out && ls -a; echo end || exit
-ls -a; echo hello && mkdir test || echo world; git status && exit
-echo bye && echo grades || mkdir class; git status && ls -a;exit
-echo assignment good bye; mkdir test; ls -a; exit
-ls -a; echo hello && exit 
+(git pull; ls) || (echo hello; exit)
+(echo push && mkdir push) || (ls -a && exit)
+(git status; mkdir out && ls -a; echo end) || exit
+(ls -a; echo hello && mkdir test) || (echo world; git status && exit)
+(echo bye && echo grades) || (mkdir class; git status && ls -a;exit)
+echo assignment good bye || (mkdir test; ls -a; exit)
+(ls -a; echo hello) || exit 
 git status; mkdir plus && ls -a;
 ls -a && exit
-ls -a || mkdir echo && git status exit
+ls -a || (mkdir echo && git status exit)
 exit;
 exit
 Exit
