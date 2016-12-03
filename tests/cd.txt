@@ -1,0 +1,13 @@
+cd -l
+cd -p
+cd -s
+cd -S
+cd -P
+cd -V 
+cd -V 
+cd -f
+cd -u
+cd 
+cd ..
+cd -r 
+cd -x
